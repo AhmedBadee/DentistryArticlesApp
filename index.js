@@ -13,7 +13,7 @@ mongoose.Promise = global.Promise;
 app.set('view engine', 'ejs');
 
 // handle static files
-app.use(express.static('public'));
+app.use(express.static('/'));
 
 app.use(routes);
 
