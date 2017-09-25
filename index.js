@@ -25,8 +25,7 @@ app.use(function(error, request, reponse, next) {
 });
 
 app.get('/', function(request, response) {
-    response.writeHead(200, {'Content-Type': 'text/plain'});
-    response.end('Go To /article');
+    response.send({message: 'You made it!'});
 });
 
 app.listen(app.get('port'));
