@@ -1,6 +1,11 @@
+html {
+    background: #009688;
+}
+
 body {
     background: #009688;
     padding: 10px;
+    font-family: arial;
 }
 
 h1 {
@@ -11,16 +16,18 @@ h1 {
 
 #article {
     background: #fff;
-    max-width: 700px;
+    max-width: 960px;
     margin: 0 auto;
     padding-bottom: 20px;
     border-radius: 7px;
 }
 
 input[type="text"] {
-    width: 50%;
-    height: 10%;
-    font-size: 2em;
+    width: 70%;
+    font-size: 1.7em;
+    border-radius: 5px;
+    border: 1px solid #607D8B;
+    padding: 7px;
 }
 
 input[type="submit"] {
@@ -30,6 +37,7 @@ input[type="submit"] {
     -webkit-transition-duration: 0.4s;
     border: 2px solid #009688;
     border-radius: 5px;
+    padding: 5px;
 }
 
 input[type="submit"]:hover {
@@ -37,15 +45,43 @@ input[type="submit"]:hover {
     color: #ffffff;
 }
 
+input[type="file"] {
+    float: left;
+    width: 60%;
+}
+
+#add, #sub {
+    float: right;
+    margin: 10px 10px;
+}
+
+#fileField {
+    margin: 10px 10px;
+}
+
 textarea {
-    width: 50%;
-    font-size: 2em;
+    width: 70%;
+    font-size: 1.7em;
     padding: 7px;
-    border-style: solid;
+    border: 1px solid #607D8B;
     border-radius: 5px;
 }
 
 .box {
     display: block;
-    margin: 0 auto;
+    margin: 20px auto;
+}
+
+fieldset {
+    width: 70%;
+    border: 1px solid #607D8B;
+    border-radius: 5px;
+}
+
+legend {
+    margin: 5px;
+    color: #607D8B;
+    font-size: 20px;
+    padding: 10px;
+    letter-spacing: 0.05em;
 }
