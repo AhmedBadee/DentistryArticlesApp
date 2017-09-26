@@ -8,12 +8,26 @@
     <body>
         <div id="article">
             <h1>Add New Article</h1>
-            <form method="post" action="/article">
-                <input class="box" type="text" name="title" placeholder="Title" required /> <br>
-                <textarea class="box" name="brief" cols="40" rows="2" placeholder="Brief" required></textarea> <br>
-                <textarea class="box" name="article" cols="40" rows="5" placeholder="Article Body" required></textarea> <br>
+            <form method="post" enctype="multipart/form-data" action="/article">
+                <input class="box" type="text" name="title" placeholder="Title" required />
+                <textarea class="box" name="brief" cols="40" rows="4" placeholder="Brief" required></textarea>
+                <textarea class="box" name="article" cols="40" rows="10" placeholder="Article Body" required></textarea>
+
+                <fieldset class="box" id="images">
+                    <legend>Upload Article Images</legend>
+                    <div id="files">
+                        <div><input id="fileField" type="file" name="images[]" /></div>
+                    </div>
+                    <div id="action-buttons">
+                        <input type="button" id="add" value="+" />
+                    </div>
+                </fieldset>
+
                 <input class="box" type="submit" value="Save Article" />
             </form>
         </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="add-entries.js"></script>
     </body>
 </html>
