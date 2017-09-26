@@ -3,14 +3,16 @@
     <head>
         <meta charset="utf8">
         <title>Add New Article</title>
+        <link href="style.css" rel="stylesheet" type="text/css">
     </head>
     <body>
         <div id="article">
+            <h1>Add New Article</h1>
             <form method="post" action="/article">
-                <input type="text" name="title" placeholder="Title" required /> <br>
-                <input type="text" name="brief" placeholder="Brief" required /> <br>
-                <textarea name="article" cols="40" rows="5" placeholder="Article Body" required></textarea> <br>
-                <input type="submit" value="Save Article" />
+                <input class="box" type="text" name="title" placeholder="Title" required /> <br>
+                <textarea class="box" name="brief" cols="40" rows="2" placeholder="Brief" required></textarea> <br>
+                <textarea class="box" name="article" cols="40" rows="5" placeholder="Article Body" required></textarea> <br>
+                <input class="box" type="submit" value="Save Article" />
             </form>
         </div>
     </body>
