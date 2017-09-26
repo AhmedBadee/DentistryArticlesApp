@@ -13,7 +13,8 @@ const ArticleSchema = new Schema({
     article: {
         type: String,
         required: [true, 'Article field is required']
-    }
+    },
+    images: [String]
 });
 
 const Article = mongoose.model('article', ArticleSchema);
