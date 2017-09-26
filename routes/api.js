@@ -8,7 +8,7 @@ const storage = multer.diskStorage({
         callback(null, './images');
     },
     filename: function(request, file, callback) {
-        callback(null, request.body.title + file.originalname);
+        callback(null, request.body.title);
     }
 });
 
@@ -24,7 +24,7 @@ router.post('/article', function(request, response, next) {
 
         var uploadedFilesNames = [String];
         for (var i = 0; i < request.files.length; i++) {
-            uploadedFilesNames[i] = request.files[i].filename;
+            uploadedFilesNames[i] = request.files[i].filename + 'fig' + (i + 1);
         }
 
         Article.create({
