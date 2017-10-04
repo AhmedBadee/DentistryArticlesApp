@@ -1,8 +1,11 @@
-const express    = require('express');
-const bodyParser = require('body-parser');
-const routes     = require('./routes/api');
-const mongoose   = require('mongoose');
-const session    = require('express-session');
+const express       = require('express');
+const bodyParser    = require('body-parser');
+const routes        = require('./routes/api');
+const mongoose      = require('mongoose');
+const session       = require('express-session');
+const cookieParser  = require('cookie-parser');
+const passport      = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
 
 const app  = express();
 const statusUnprocessibleEntity = 422;
@@ -21,16 +24,25 @@ app.use(express.static(__dirname + '/public'));
 
 app.use(bodyParser.urlencoded({extended: false}));
 
-app.use(routes);
-
 app.use(session({
     secret: '#@%%*&^(&^REDfgY)($@%23@!@#%%$%#^&',
     resave: false,
     saveUninitialized: true
 }));
 
+app.use(cookieParser());
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(routes);
+
 app.use(function(error, request, reponse, next) {
     reponse.status(statusUnprocessibleEntity).send({error: error.message});
+});
+
+app.use(function(request, response, next) {
+    response.locals.user = request.user || null;
+    next();
 });
 
 app.get('/', function(request, response) {
