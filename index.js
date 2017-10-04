@@ -14,7 +14,7 @@ const statusUnprocessibleEntity = 422;
 mongoose.connect('mongodb://ahmed:ahmedbadee@ds149954.mlab.com:49954/dentistry', {useMongoClient: true});
 mongoose.Promise = global.Promise;
 
-app.set('port', (process.env.PORT || 3000));
+app.set('port', (process.env.PORT || 8080));
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
