@@ -1,47 +1,95 @@
-const express          = require('express');
-const Article          = require('../models/article');
-const multer           = require('multer');
+const express       = require('express');
+const Article       = require('../models/article');
+const User          = require('../models/user');
+const multer        = require('multer');
+const passport      = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
 
-const router           = express.Router();
+const router = express.Router();
 
-var session;
-
+// Configuring multer options
 const storage = multer.diskStorage({
     destination: function(request, file, callback) {
-        callback(null, './images');
+        callback(null, './public/images');
     },
     filename: function(request, file, callback) {
-        callback(null, request.body.title);
+        callback(null, file.originalname);
     }
 });
 
 const upload = multer({storage: storage}).any();
 
-router.get('/login', function(request, response) {
-    if (session) {
-        response.redirect('/article');
-    } else {
-        response.render('login');
-    }
+// Configuring passport options
+passport.use(new LocalStrategy(function(username, password, done) {
+    User.getUserByUsername(username, function(error, user) {
+        if (error) throw error;
+
+        if (!user) {
+            return done(null, false, {message: 'Unknown user'});
+        }
+
+        User.comparePassword(password, user.password, function(error, isMatch) {
+            if (error) throw error;
+
+            if (isMatch) {
+                return done(null, user);
+            } else {
+                return done(null, false, {message: 'Invalid Password'});
+            }
+        });
+    });
+}));
+
+passport.serializeUser(function(user, done) {
+    done(null, user.id);
+});
+   
+passport.deserializeUser(function(id, done) {
+    User.getUserById(id, function (error, user) {
+      done(error, user);
+    });
 });
 
-router.post('/login', function(request, response) {
-    if (session) {
-        response.redirect('/article');
-    } else if (request.body.username == 'admin' && request.body.password == 'admin') {
-        request.sessionID = request.body.username;
-        session = request.sessionID;
-        response.redirect('/article');
-    }
-});
-
-router.get('/article', function(request, response, next) {
-    if (session) {
-        response.render('article');
-        console.log(request);
+function ensureAuth(request, response, next) {
+    if (request.isAuthenticated()) {
+        return next();
     } else {
         response.redirect('/login');
     }
+}
+
+// Register routes
+router.get('/register', function(request, response, next) {
+    response.render('register');
+});
+
+router.post('/register', function(request, response, next) {
+    var username = request.body.username;
+    var password = request.body.password;
+
+    var newUser = new User({
+        username: username,
+        password: password
+    });
+
+    User.createUser(newUser, function(error, user) {
+        if (error) throw error;
+        response.redirect('/login');
+    });
+});
+
+// Login routes
+router.get('/login', function(request, response) {
+    response.render('login');
+});
+
+router.post('/login', passport.authenticate('local'), function(request, response) {
+    response.redirect('/article');
+});
+
+// Article routes
+router.get('/article', ensureAuth,function(request, response, next) {
+    response.render('article');
 });
 
 router.post('/article', function(request, response, next) {
@@ -50,7 +98,7 @@ router.post('/article', function(request, response, next) {
 
         var uploadedFilesNames = [String];
         for (var i = 0; i < request.files.length; i++) {
-            uploadedFilesNames[i] = request.files[i].filename + '_fig-' + (i + 1);
+            uploadedFilesNames[i] = request.files[i].filename;
         }
 
         Article.create({
