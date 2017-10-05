@@ -5,7 +5,6 @@ const mongoose      = require('mongoose');
 const session       = require('express-session');
 const cookieParser  = require('cookie-parser');
 const passport      = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
 
 const app  = express();
 const statusUnprocessibleEntity = 422;
@@ -14,7 +13,7 @@ const statusUnprocessibleEntity = 422;
 mongoose.connect('mongodb://ahmed:ahmedbadee@ds149954.mlab.com:49954/dentistry', {useMongoClient: true});
 mongoose.Promise = global.Promise;
 
-app.set('port', (process.env.PORT || 8080));
+app.set('port', (process.env.PORT || 3000));
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
