@@ -44,8 +44,10 @@ app.use(function(request, response, next) {
     next();
 });
 
+/*
 app.get('/', function(request, response) {
     response.send({message: 'You made it!'});
 });
+*/
 
 app.listen(app.get('port'));
