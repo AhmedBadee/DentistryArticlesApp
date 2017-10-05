@@ -58,6 +58,13 @@ function ensureAuth(request, response, next) {
     }
 }
 
+// Home route
+router.get('/', function(request, response, next) {
+    Article.find({}).then(function(articles) {
+        response.send(articles);
+    });
+});
+
 // Register routes
 router.get('/register', function(request, response, next) {
     response.render('register');
