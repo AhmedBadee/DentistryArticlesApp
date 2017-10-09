@@ -97,10 +97,7 @@ router.post('/login', passport.authenticate('local'), function(request, response
 
 // Article routes
 router.get('/article', ensureAuth, function(request, response, next) {
-    // response.render('article');
-    fs.unlinkSync('/images/2017-09-08-205817.jpg');
-    fs.unlinkSync('/images/2017-09-08-205826.jpg');
-    response.send('Successfully Deleted');
+    response.render('article');
 });
 
 router.post('/article', function(request, response, next) {
