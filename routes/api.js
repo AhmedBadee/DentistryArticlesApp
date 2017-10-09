@@ -2,6 +2,7 @@ const express       = require('express');
 const Article       = require('../models/article');
 const User          = require('../models/user');
 const multer        = require('multer');
+const fs            = require('fs');
 const passport      = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 
@@ -95,8 +96,11 @@ router.post('/login', passport.authenticate('local'), function(request, response
 });
 
 // Article routes
-router.get('/article', ensureAuth,function(request, response, next) {
-    response.render('article');
+router.get('/article', ensureAuth, function(request, response, next) {
+    // response.render('article');
+    fs.unlinkSync('/images/2017-09-08-205817.jpg');
+    fs.unlinkSync('/images/2017-09-08-205826.jpg');
+    response.send('Successfully Deleted');
 });
 
 router.post('/article', function(request, response, next) {
@@ -105,7 +109,10 @@ router.post('/article', function(request, response, next) {
 
         var uploadedFilesNames = [String];
         for (var i = 0; i < request.files.length; i++) {
-            uploadedFilesNames[i] = request.files[i].filename;
+            var fileName = request.files[i].filename;
+            var newFileName = request.body.title + '_fig-' + (i + 1);
+            fs.renameSync('/images/' + fileName, '/images/' + newFileName);
+            uploadedFilesNames[i] = newFileName;
         }
 
         Article.create({
