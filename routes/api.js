@@ -104,19 +104,11 @@ router.post('/article', function(request, response, next) {
     upload(request, response, function(error) {
         if (error) throw error;
 
-        var uploadedFilesNames = [String];
-        for (var i = 0; i < request.files.length; i++) {
-            var fileName = request.files[i].filename;
-            var newFileName = request.body.title + '_fig-' + (i + 1);
-            fs.renameSync('/images/' + fileName, '/images/' + newFileName);
-            uploadedFilesNames[i] = newFileName;
-        }
-
         Article.create({
             title: request.body.title,
             brief: request.body.brief,
             article: request.body.article,
-            images: uploadedFilesNames
+            images: request.body.images
         }).then(function(article) {
             response.send(article);
         }).catch(next);
