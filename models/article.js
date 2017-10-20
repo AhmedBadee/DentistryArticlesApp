@@ -14,7 +14,10 @@ const ArticleSchema = new Schema({
         type: String,
         required: [true, 'Article field is required']
     },
-    images: [String]
+    images: {
+        type: [String],
+        default: ['empty']
+    }
 });
 
 const Article = mongoose.model('article', ArticleSchema);
