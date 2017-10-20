@@ -21,7 +21,7 @@ app.set('view engine', 'ejs');
 // handle static files
 app.use(express.static(__dirname + '/public'));
 
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(session({
     secret: '#@%%*&^(&^REDfgY)($@%23@!@#%%$%#^&',
