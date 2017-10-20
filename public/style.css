@@ -30,8 +30,16 @@ h1 {
     width: 50%;
 }
 
-.text {
+.title {
     font-size: 1.7em;
+}
+
+.urls {
+    font-size: 1.0em;
+    display: block;
+}
+
+.text-all {
     border-radius: 5px;
     border: 1px solid #607D8B;
     padding: 7px;
@@ -59,11 +67,11 @@ input[type="file"] {
 
 #add, #sub {
     float: right;
-    margin: 10px 10px;
+    margin: auto auto;
 }
 
 #fileField {
-    margin: 10px 10px;
+    margin: 10px;
 }
 
 textarea {
@@ -77,6 +85,26 @@ textarea {
 .box {
     display: block;
     margin: 20px auto;
+}
+
+#action-buttons, #files {
+    display: inline-block;
+}
+
+#action-buttons {
+    width: 20%;
+    float: right;
+    margin: auto auto;
+}
+
+#files {
+    width: 70%;
+}
+
+.image-box {
+    display: inline-block;
+    margin: 10px;
+    width: 70%;
 }
 
 fieldset {
