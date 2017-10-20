@@ -9,14 +9,17 @@
         <div id="article">
             <h1>Add New Article</h1>
             <form method="post" enctype="multipart/form-data" action="/article">
-                <input class="box titleWidth text" type="text" name="title" placeholder="Title" required />
+                <input class="box titleWidth text-all title" type="text" name="title" placeholder="Title" required />
                 <textarea class="box" name="brief" cols="40" rows="4" placeholder="Brief" required></textarea>
                 <textarea class="box" name="article" cols="40" rows="10" placeholder="Article Body" required></textarea>
 
                 <fieldset class="box" id="images">
                     <legend>Upload Article Images</legend>
                     <div id="files">
-                        <div><input id="fileField" type="file" name="images[]" /></div>
+                        <div>
+                            <!-- <input id="fileField" type="file" name="images[]" /> -->
+                            <input class="image-box text-all urls" type="text" name="images[]" placeholder="Image URL" />
+                        </div>
                     </div>
                     <div id="action-buttons">
                         <input type="button" id="add" value="+" />
