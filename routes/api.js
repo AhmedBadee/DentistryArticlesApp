@@ -100,6 +100,14 @@ router.get('/article', ensureAuth, function(request, response, next) {
     response.render('article');
 });
 
+router.get('/article/:title', function(request, response, next) {
+    var title = request.params.title;
+
+    Article.findOne({title: title}).then(function(article) {
+        response.render('read_article', {article: article});
+    });
+});
+
 router.post('/article', function(request, response, next) {
     upload(request, response, function(error) {
         if (error) throw error;
