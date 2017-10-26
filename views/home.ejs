@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>All Articles</title>
+        <link href="home_styles.css" rel="stylesheet" />
+    </head>
+    <body>
+        <% articles.forEach(function(article) { %>
+            <div>
+                <h2><%= article.title %></h2>
+                <img src="<%= article.images[0] %>" />
+                <h3><%= article.brief %></h3>
+                <a href="#">Read Article</a>
+            </div>
+        <% }); %>
+    </body>
+</html>
