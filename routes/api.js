@@ -60,9 +60,9 @@ function ensureAuth(request, response, next) {
 }
 
 // Home route
-router.get('/', function(request, response, next) {
+router.get(['/', '/home'], function(request, response, next) {
     Article.find({}).then(function(articles) {
-        response.send(articles);
+        response.render('home', {articles: articles});
     });
 });
 
