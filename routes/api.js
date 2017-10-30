@@ -59,6 +59,8 @@ function ensureAuth(request, response, next) {
     }
 }
 
+// Front-end API
+
 // Home route
 router.get(['/', '/home'], function(request, response, next) {
     Article.find({}).then(function(articles) {
@@ -129,6 +131,23 @@ router.put('/article/:id', function(request, response, next) {
 
 router.delete('/article/:id', function(request, response, next) {
     
+});
+
+// Mobile API
+
+// All Articles
+router.get('/mobile/all/articles', function(request, response, next) {
+    Article.find({}).then(function(articles) {
+        response.send(articles);
+    });
+});
+
+router.get('/mobile/single/article/:title', function(request, response, next) {
+    var title = request.params.title;
+
+    Article.findOne({title: title}).then(function(article) {
+        response.send(article);
+    });
 });
 
 module.exports = router;
